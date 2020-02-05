@@ -1,4 +1,4 @@
-import { ADD_FEATURE } from "../actions";
+import { ADD_FEATURE, REMOVE_FEATURE } from "../actions";
 
 export const initialState = {
     additionalPrice: 0,
@@ -30,6 +30,20 @@ export const carReducer = (state = initialState, action) => {
                             feature => feature.id === action.payload
                         )
                     ]
+                }
+            };
+        case REMOVE_FEATURE:
+            const carFeatures = [...state.car.features];
+            const featureIndex = carFeatures.findIndex(
+                feature => feature.id === action.payload
+            );
+            carFeatures.splice(featureIndex, 1);
+
+            return {
+                ...state,
+                car: {
+                    ...state.car,
+                    features: carFeatures
                 }
             };
         default:
