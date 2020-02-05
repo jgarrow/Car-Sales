@@ -1,4 +1,8 @@
-import { ADD_FEATURE, REMOVE_FEATURE } from "../actions";
+import {
+    ADD_FEATURE,
+    REMOVE_FEATURE,
+    CALCULATE_ADDITIONAL_PRICE
+} from "../actions";
 
 export const initialState = {
     additionalPrice: 0,
@@ -45,6 +49,21 @@ export const carReducer = (state = initialState, action) => {
                     ...state.car,
                     features: carFeatures
                 }
+            };
+        case CALCULATE_ADDITIONAL_PRICE:
+            let addedCosts = 0;
+
+            state.car.features.map(feature => {
+                console.log("Initial addedCosts: ", addedCosts);
+                addedCosts += feature.price;
+                return addedCosts;
+            });
+
+            console.log("Final addedCosts: ", addedCosts);
+
+            return {
+                ...state,
+                additionalPrice: addedCosts
             };
         default:
             return state;
