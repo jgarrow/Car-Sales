@@ -1,6 +1,7 @@
 export const ADD_FEATURE = "ADD_FEATURE";
 export const REMOVE_FEATURE = "REMOVE_FEATURE";
-export const CALCULATE_ADDITIONAL_PRICE = "CALCULATE_ADDITIONAL_PRICE";
+export const ADD_TO_ADDITIONAL_PRICE = "ADD_TO_ADDITIONAL_PRICE";
+export const SUBTRACT_FROM_ADDITIONAL_PRICE = "SUBTRACT_FROM_ADDITIONAL_PRICE";
 
 export const addFeature = featureId => {
     return {
@@ -16,8 +17,15 @@ export const removeFeature = featureId => {
     };
 };
 
-export const calculateAdditionalPrice = () => {
+export const calculateAddToAdditionalPrice = () => {
     return {
-        type: CALCULATE_ADDITIONAL_PRICE
+        type: ADD_TO_ADDITIONAL_PRICE
+    };
+};
+
+export const calculateSubtractFromAdditionalPrice = cost => {
+    return {
+        type: SUBTRACT_FROM_ADDITIONAL_PRICE,
+        payload: cost
     };
 };

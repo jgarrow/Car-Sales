@@ -1,7 +1,8 @@
 import {
     ADD_FEATURE,
     REMOVE_FEATURE,
-    CALCULATE_ADDITIONAL_PRICE
+    ADD_TO_ADDITIONAL_PRICE,
+    SUBTRACT_FROM_ADDITIONAL_PRICE
 } from "../actions";
 
 export const initialState = {
@@ -50,7 +51,7 @@ export const carReducer = (state = initialState, action) => {
                     features: carFeatures
                 }
             };
-        case CALCULATE_ADDITIONAL_PRICE:
+        case ADD_TO_ADDITIONAL_PRICE:
             let addedCosts = 0;
 
             state.car.features.map(feature => {
@@ -64,6 +65,11 @@ export const carReducer = (state = initialState, action) => {
             return {
                 ...state,
                 additionalPrice: addedCosts
+            };
+        case SUBTRACT_FROM_ADDITIONAL_PRICE:
+            return {
+                ...state,
+                additionalPrice: state.additionalPrice - action.payload
             };
         default:
             return state;

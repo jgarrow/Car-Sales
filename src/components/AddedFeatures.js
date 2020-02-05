@@ -1,15 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { removeFeature } from "../actions";
+import {
+    removeFeature,
+    calculateSubtractFromAdditionalPrice
+} from "../actions";
 
 import AddedFeature from "./AddedFeature";
 
 const AddedFeatures = props => {
-    const handleRemove = (e, featureId) => {
+    const handleRemove = (e, feature) => {
         console.log("In handleRemove");
         e.preventDefault();
-        props.removeFeature(featureId);
+        props.removeFeature(feature.id);
+        props.calculateSubtractFromAdditionalPrice(feature.price);
     };
 
     return (
@@ -34,8 +38,12 @@ const AddedFeatures = props => {
 
 const mapStateToProps = state => {
     return {
-        car: state.car
+        car: state.car,
+        additionalPrice: state.additionalPrice
     };
 };
 
-export default connect(mapStateToProps, { removeFeature })(AddedFeatures);
+export default connect(mapStateToProps, {
+    removeFeature,
+    calculateSubtractFromAdditionalPrice
+})(AddedFeatures);
